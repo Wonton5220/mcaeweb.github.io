@@ -208,7 +208,7 @@
             box-shadow: inset 0 0 0 1px var(--border-color), 0 10px 20px -5px rgba(0,0,0,0.2);
         }
         canvas {
-            background: transparent; /* 不再使用纯色背景，改为绘制棋盘格 */
+            background: transparent;
             border-radius: 24px;
             box-shadow: 0 10px 25px -5px black;
             max-width: 100%;
@@ -305,7 +305,7 @@
     let lastFrameTime = 0;
     let animFrameId = null;
     let isFramesCollapsed = false;
-    let currentLang = 'zh';   // 默认中文
+    let currentLang = 'zh';
     let gifWorkerBlobUrl = null;
 
     // ========== 翻译字典 ==========
@@ -343,9 +343,9 @@
         return text;
     }
 
-    // ========== 语言切换核心 ==========
+    // ========== 语言切换核心（彻底刷新所有文字） ==========
     function applyLanguage() {
-        // 更新所有静态元素
+        // 按钮及标签
         document.querySelector('#addFrameBtn').innerText = t('addFrame');
         document.querySelector('#removeAllBtn').innerHTML = t('clearAll');
         document.querySelector('#uploadMcMetaBtn').innerHTML = t('uploadMcMeta');
@@ -363,6 +363,7 @@
             batchLabel.innerHTML = t('batch') + ' ';
             if (inputElem) batchLabel.appendChild(inputElem);
         }
+        // 帧列表标题、空状态、帧标签、底部、折叠提示
         document.querySelector('#framesHeaderLabel').innerText = t('framesHeader');
         document.querySelector('#emptyPlaceholderText').innerHTML = t('emptyPlaceholder');
         document.querySelector('#frameLabel').innerText = t('frameLabel');
@@ -374,7 +375,7 @@
         document.querySelector('#langToggleBtn').innerText = currentLang === 'zh' ? '🌏' : '🌎';
         // 帧计数
         updateFrameCountText();
-        // 重新渲染帧列表（更新ms单位）
+        // 重新渲染帧列表（刷新“ms”单位及空状态文本）
         renderFrameList();
     }
 
@@ -394,7 +395,7 @@
         if (lang === currentLang) return;
         currentLang = lang;
         localStorage.setItem('mcae_lang', lang);
-        applyLanguage(); // 同步刷新所有文字
+        applyLanguage();
     }
 
     function toggleLang() {
@@ -447,7 +448,7 @@
         finalCanvas.width = STD_WIDTH; finalCanvas.height = STD_HEIGHT;
         const ctx = finalCanvas.getContext('2d');
         ctx.imageSmoothingEnabled = false;
-        ctx.clearRect(0, 0, STD_WIDTH, STD_HEIGHT); // 透明背景
+        ctx.clearRect(0, 0, STD_WIDTH, STD_HEIGHT);
         const scale = Math.min(STD_WIDTH / canvasSquare.width, STD_HEIGHT / canvasSquare.height);
         const dw = canvasSquare.width * scale, dh = canvasSquare.height * scale;
         ctx.drawImage(canvasSquare, (STD_WIDTH - dw) / 2, (STD_HEIGHT - dh) / 2, dw, dh);
@@ -575,7 +576,7 @@
         if(isPlaying) restartPreview();
     }
 
-    // ========== 预览绘制（带棋盘格背景） ==========
+    // ========== 预览绘制（棋盘格背景） ==========
     function drawCheckerboard(ctx, w, h) {
         const c1 = getComputedStyle(document.body).getPropertyValue('--checker-color1').trim() || '#2f3545';
         const c2 = getComputedStyle(document.body).getPropertyValue('--checker-color2').trim() || '#222736';
@@ -592,7 +593,6 @@
         const canvas = document.getElementById('previewCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = STD_WIDTH; canvas.height = STD_HEIGHT;
-        // 绘制棋盘格背景
         drawCheckerboard(ctx, STD_WIDTH, STD_HEIGHT);
         if (!frames.length) {
             document.getElementById('currentFrameIdx').innerText = '0';
@@ -681,19 +681,34 @@
         input.click();
     }
 
-    // ========== 图标模式缩放（无黑边） ==========
-    function resizeRawCanvasNearest(srcCanvas, targetWidth) {
-        const canvas = document.createElement('canvas');
-        canvas.width = targetWidth;
-        canvas.height = targetWidth;
+    // ========== 修复黑边：将透明像素替换为品红并设置透明色 ==========
+    function fillTransparentWithMagenta(canvas) {
         const ctx = canvas.getContext('2d');
-        ctx.imageSmoothingEnabled = false;
-        ctx.clearRect(0, 0, targetWidth, targetWidth); // 透明背景
-        ctx.drawImage(srcCanvas, 0, 0, targetWidth, targetWidth);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+            if (data[i+3] === 0) {
+                data[i] = 255;   // R
+                data[i+1] = 0;   // G
+                data[i+2] = 255; // B
+                data[i+3] = 255;
+            }
+        }
+        ctx.putImageData(imageData, 0, 0);
         return canvas;
     }
 
-    // ========== GIF 导出（修复透明） ==========
+    function prepareCanvasForGif(srcCanvas) {
+        const copy = document.createElement('canvas');
+        copy.width = srcCanvas.width;
+        copy.height = srcCanvas.height;
+        const ctx = copy.getContext('2d');
+        ctx.clearRect(0, 0, copy.width, copy.height);
+        ctx.drawImage(srcCanvas, 0, 0);
+        return fillTransparentWithMagenta(copy);
+    }
+
+    // ========== GIF 导出（含透明处理） ==========
     async function getGifWorkerBlobUrl() {
         if (gifWorkerBlobUrl) return gifWorkerBlobUrl;
         try {
@@ -707,6 +722,7 @@
             throw new Error('无法加载GIF编码库，请检查网络连接');
         }
     }
+
     async function exportNormalGif() {
         if (frames.length === 0) throw new Error("No frames");
         const workerUrl = await getGifWorkerBlobUrl();
@@ -719,19 +735,14 @@
                 document.head.appendChild(script);
             });
         }
-        const gif = new GIF({ workers: 2, quality: 10, width: STD_WIDTH, height: STD_HEIGHT, workerScript: workerUrl });
+        const gif = new GIF({ workers: 2, quality: 10, width: STD_WIDTH, height: STD_HEIGHT, workerScript: workerUrl, transparent: 0xFF00FF });
         for (let i = 0; i < frames.length; i++) {
-            const frameCanvas = frames[i].normalizedCanvas;
-            // 复制画布以保留透明
-            const copy = document.createElement('canvas');
-            copy.width = frameCanvas.width; copy.height = frameCanvas.height;
-            const ctx = copy.getContext('2d');
-            ctx.clearRect(0, 0, copy.width, copy.height);
-            ctx.drawImage(frameCanvas, 0, 0);
-            gif.addFrame(copy, { delay: frames[i].delayMs, copy: true });
+            const prepared = prepareCanvasForGif(frames[i].normalizedCanvas);
+            gif.addFrame(prepared, { delay: frames[i].delayMs, copy: true });
         }
         return new Promise((resolve, reject) => { gif.on('finished', resolve); gif.on('error', reject); gif.render(); });
     }
+
     async function exportIconGif(targetWidth) {
         if (frames.length === 0) throw new Error("No frames");
         const workerUrl = await getGifWorkerBlobUrl();
@@ -744,13 +755,23 @@
                 document.head.appendChild(script);
             });
         }
-        const gif = new GIF({ workers: 2, quality: 10, width: targetWidth, height: targetWidth, workerScript: workerUrl });
+        const gif = new GIF({ workers: 2, quality: 10, width: targetWidth, height: targetWidth, workerScript: workerUrl, transparent: 0xFF00FF });
         for (let i = 0; i < frames.length; i++) {
-            const scaledCanvas = resizeRawCanvasNearest(frames[i].rawCanvas, targetWidth);
-            gif.addFrame(scaledCanvas, { delay: frames[i].delayMs, copy: true });
+            // 直接缩放 rawCanvas（原始正方形切片），无黑边
+            const raw = frames[i].rawCanvas;
+            const scaled = document.createElement('canvas');
+            scaled.width = targetWidth;
+            scaled.height = targetWidth;
+            const ctx = scaled.getContext('2d');
+            ctx.imageSmoothingEnabled = false;
+            ctx.clearRect(0, 0, targetWidth, targetWidth);
+            ctx.drawImage(raw, 0, 0, targetWidth, targetWidth);
+            const prepared = fillTransparentWithMagenta(scaled);
+            gif.addFrame(prepared, { delay: frames[i].delayMs, copy: true });
         }
         return new Promise((resolve, reject) => { gif.on('finished', resolve); gif.on('error', reject); gif.render(); });
     }
+
     async function exportMcIconGifs() {
         if (frames.length === 0) { alert(t('alertNoFrames')); return; }
         showToast(t('toastGenerating'));
@@ -762,6 +783,7 @@
             showToast(t('toastDual'));
         } catch(e) { alert(t('alertExportFail') + e.message); }
     }
+
     async function handleExport() {
         if (frames.length === 0) { alert(t('alertNoFrameExport')); return; }
         const exportBtn = document.getElementById('exportGifBtn');
@@ -778,6 +800,7 @@
         } catch(e) { alert(t('alertExportFail') + e.message); }
         finally { exportBtn.disabled = false; exportBtn.textContent = originalText; }
     }
+
     function downloadBlob(blob, filename) {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -785,6 +808,7 @@
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
         URL.revokeObjectURL(url);
     }
+
     function showToast(msg) {
         const toast = document.createElement('div');
         toast.className = 'success-toast';
@@ -800,12 +824,14 @@
         else setTheme('dark');
         document.getElementById('themeToggleBtn').innerText = stored === 'light' ? '☽' : '☼';
     }
+
     function initLang() {
         const stored = localStorage.getItem('mcae_lang');
         if (stored === 'en') currentLang = 'en';
         else currentLang = 'zh';
-        applyLanguage(); // 第一次应用语言
+        applyLanguage();
     }
+
     function initCollapseState() {
         const saved = localStorage.getItem('mcae_frames_collapsed');
         const framesOuter = document.getElementById('framesListContainer');
@@ -820,6 +846,7 @@
             collapseBtn.classList.remove('collapsed');
         }
     }
+
     function toggleFramesCollapse() {
         const framesOuter = document.getElementById('framesListContainer');
         const collapseBtn = document.getElementById('collapseFramesBtn');
@@ -871,7 +898,7 @@
     // ========== 启动 ==========
     async function init() {
         initTheme();
-        initLang();      // 应用语言（默认中文）
+        initLang();
         initCollapseState();
         ctx.imageSmoothingEnabled = false;
         await renderFrameList();
