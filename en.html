@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>MC.A.E. Web - Minecraft Animated Icon GIF Generator</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,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">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <style>
+        :root {
+            --bg-body: #1e1f2c;
+            --bg-container: #252836;
+            --bg-panel: #2f3342;
+            --bg-card: #1e212e;
+            --border-color: #3a3f50;
+            --text-primary: #eef4ff;
+            --text-secondary: #9ca3c0;
+            --btn-primary-bg: linear-gradient(135deg, #0f5f9e, #1e8bc3);
+            --btn-primary-border: #2b8fc9;
+            --btn-secondary-bg: #3b4055;
+            --checker-color1: #2f3545;
+            --checker-color2: #222736;
+        }
+        body.light {
+            --bg-body: #f5efe7;
+            --bg-container: #ffffff;
+            --bg-panel: #f8f4ed;
+            --bg-card: #ffffff;
+            --border-color: #e2dcd2;
+            --text-primary: #2c2b28;
+            --text-secondary: #6b6258;
+            --btn-primary-bg: linear-gradient(135deg, #a259ff, #6b3fe0);
+            --btn-primary-border: #b87cff;
+            --btn-secondary-bg: #eae2d4;
+            --checker-color1: #e0d8cd;
+            --checker-color2: #f0ece4;
+        }
+        * { box-sizing: border-box; user-select: none; transition: background 0.2s ease, border 0.2s ease, color 0.1s ease; }
+        body {
+            background: var(--bg-body);
+            font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: var(--text-primary);
+        }
+        .app-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: var(--bg-container);
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 18px 24px;
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+        .tool-group {
+            display: flex;
+            gap: 8px;
+            background: var(--bg-card);
+            padding: 6px 14px;
+            border-radius: 48px;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+        button, .file-label {
+            background: var(--btn-secondary-bg);
+            border: 2px solid transparent;
+            color: var(--text-primary);
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .circle-btn {
+            width: 38px;
+            height: 38px;
+            padding: 0;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 20px;
+            background: var(--btn-primary-bg);
+            border: 1px solid var(--btn-primary-border);
+        }
+        .primary-btn {
+            background: var(--btn-primary-bg);
+            border-color: var(--btn-primary-border);
+            color: white;
+            text-shadow: 0 1px 0 rgba(0,0,0,0.1);
+        }
+        .primary-btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+        .danger-btn { background: #b13e3e; border-color: #cf5a5a; color: white; }
+        .danger-btn:hover { background: #d14545; }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            padding: 5px 16px;
+            border-radius: 40px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+        }
+        .slider-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            background: var(--bg-card);
+            padding: 4px 14px;
+            border-radius: 40px;
+            border: 1px solid var(--border-color);
+        }
+        input[type="range"] { width: 120px; cursor: pointer; background: var(--border-color); height: 3px; border-radius: 3px; }
+        input[type="number"] { background: var(--bg-body); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 20px; padding: 5px 12px; width: 75px; text-align: center; }
+        .main-layout { display: flex; flex-wrap: wrap; gap: 0; }
+        .frames-panel {
+            width: 360px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .frames-header {
+            padding: 16px 20px;
+            background: var(--bg-card);
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .collapse-btn {
+            background: var(--btn-secondary-bg);
+            border: none;
+            border-radius: 32px;
+            width: 32px;
+            height: 32px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            color: var(--text-primary);
+            padding: 0;
+        }
+        .collapse-btn.collapsed { transform: rotate(180deg); }
+        .frames-list-container { transition: all 0.2s ease; overflow-y: auto; }
+        .frames-list-container.collapsed { display: none; }
+        .frames-list { padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+        .frame-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 12px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            cursor: grab;
+        }
+        .frame-card:active { cursor: grabbing; }
+        .frame-thumb {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-body);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .frame-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; image-rendering: crisp-edges; image-rendering: pixelated; }
+        .frame-info { flex: 1; }
+        .frame-index { font-size: 13px; color: var(--text-secondary); margin-bottom: 5px; }
+        .delay-control { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .delay-control input { width: 70px; background: var(--bg-body); border: 1px solid var(--border-color); border-radius: 40px; padding: 5px 8px; color: var(--text-primary); font-size: 12px; }
+        .del-frame { background: none; color: #e06c75; font-size: 20px; padding: 5px 8px; box-shadow: none; border: none; }
+        .del-frame:hover { background: #3a2a2e; transform: none; color: #ff8a9a; }
+        .preview-panel { flex: 1; padding: 24px; display: flex; flex-direction: column; gap: 20px; background: var(--bg-container); }
+        .canvas-area {
+            background: var(--bg-panel);
+            border-radius: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            box-shadow: inset 0 0 0 1px var(--border-color), 0 10px 20px -5px rgba(0,0,0,0.2);
+        }
+        canvas {
+            background: transparent;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px black;
+            max-width: 100%;
+            height: auto;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+        }
+        .preview-controls { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; }
+        .status-badge { background: var(--bg-card); padding: 6px 16px; border-radius: 50px; font-family: monospace; font-size: 14px; border: 1px solid var(--border-color); }
+        .empty-placeholder { text-align: center; color: var(--text-secondary); padding: 40px; background: var(--empty-bg); border-radius: 28px; }
+        .badge-icon { background: var(--btn-primary-bg); padding: 2px 10px; border-radius: 50px; font-size: 12px; color: white; }
+        footer { background: var(--bg-panel); padding: 12px 24px; text-align: center; font-size: 12px; color: var(--text-secondary); border-top: 1px solid var(--border-color); }
+        .success-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2c6e2c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 100px;
+            z-index: 1000;
+            font-size: 14px;
+            box-shadow: 0 4px 12px black;
+            animation: fadeout 2s forwards;
+        }
+        @keyframes fadeout { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+        @media (max-width: 780px) { .frames-panel { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); } }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="toolbar">
+        <div class="tool-group">
+            <button id="addFrameBtn">+ Add Frame</button>
+            <button id="removeAllBtn" class="danger-btn">✕ Clear All</button>
+            <button id="themeToggleBtn" class="circle-btn">☼</button>
+            <button id="langToggleBtn" class="circle-btn" onclick="location.href='zh.html'" title="切换到中文">🌏</button>
+        </div>
+        <div class="tool-group">
+            <button id="uploadMcMetaBtn" style="background:#564c9c;">[M] Upload .mcmeta</button>
+            <label class="checkbox-label" id="iconModeLabel">
+                <input type="checkbox" id="mcIconModeCheckbox"> <span id="iconModeText">[Icon Mode] Wiki Dual Size</span>
+            </label>
+        </div>
+        <div class="tool-group">
+            <button id="playBtn">▶ Play</button>
+            <button id="stopBtn">■ Stop</button>
+            <button id="exportGifBtn" class="primary-btn">↓ Export GIF</button>
+        </div>
+        <div class="tool-group">
+            <div class="slider-label"><span id="zoomLabel">[Zoom]</span><input type="range" id="zoomSlider" min="30" max="200" value="100"><span id="zoomVal">100%</span></div>
+            <div class="slider-label"><span id="delayLabel">[Delay]</span><input type="number" id="globalDelay" value="100" step="10"><button id="applyGlobalDelay" style="padding:4px 12px;">Apply</button></div>
+        </div>
+        <div class="tool-group">
+            <label class="file-label" id="batchLabel" for="batchFilesInput" style="background:var(--btn-secondary-bg);">
+                <span id="batchLabelText">[Folder] Batch Import</span>
+            </label>
+            <input type="file" id="batchFilesInput" multiple accept="image/png,image/jpeg,image/gif,image/webp" style="display:none">
+        </div>
+    </div>
+    <div class="main-layout">
+        <div class="frames-panel">
+            <div class="frames-header">
+                <span id="framesHeaderLabel">Frame Sequence (Drag to sort · Auto crop)</span>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <span class="badge-icon" id="frameCountBadge">0 frames</span>
+                    <button id="collapseFramesBtn" class="collapse-btn" title="Collapse/Expand frame list">^</button>
+                </div>
+            </div>
+            <div id="framesListContainer" class="frames-list-container">
+                <div class="frames-list" id="framesListInner">
+                    <div class="empty-placeholder" id="emptyPlaceholderText">✨ Upload image to auto-crop square frames<br>Supports .mcmeta frame delay config</div>
+                </div>
+            </div>
+        </div>
+        <div class="preview-panel">
+            <div class="canvas-area">
+                <canvas id="previewCanvas" width="480" height="480" style="width:100%; max-width:480px; aspect-ratio:1/1"></canvas>
+            </div>
+            <div class="preview-controls">
+                <div class="status-badge" id="playStatus">■ Stopped</div>
+                <div class="status-badge"><span id="frameLabel">Frame</span> <span id="currentFrameIdx">0</span> / <span id="totalFramesSpan">0</span></div>
+            </div>
+        </div>
+    </div>
+    <footer id="footerText">Auto crop: image width splits into square frames | Collapsible panel | Hard-edge preview | Day/Night & EN/CN</footer>
+</div>
+<script>
+    let frames = [];
+    const STD_WIDTH = 480, STD_HEIGHT = 480;
+    let currentPreviewFrame = 0;
+    let isPlaying = false;
+    let lastFrameTime = 0;
+    let animFrameId = null;
+    let isFramesCollapsed = false;
+    let gifWorkerBlobUrl = null;
+
+    const previewCanvas = document.getElementById('previewCanvas');
+    const ctx = previewCanvas.getContext('2d');
+
+    function cropImageIntoSquares(imgElement) {
+        return new Promise((resolve) => {
+            const imgWidth = imgElement.width, imgHeight = imgElement.height;
+            const squareSize = imgWidth;
+            if (squareSize <= 0) return resolve([]);
+            const rows = Math.floor(imgHeight / squareSize);
+            if (rows === 0) {
+                const canvas = document.createElement('canvas');
+                canvas.width = squareSize; canvas.height = squareSize;
+                const c = canvas.getContext('2d');
+                c.imageSmoothingEnabled = false;
+                c.drawImage(imgElement, 0, 0, squareSize, squareSize, 0, 0, squareSize, squareSize);
+                return resolve([canvas]);
+            }
+            const squares = [];
+            for (let row = 0; row < rows; row++) {
+                const canvas = document.createElement('canvas');
+                canvas.width = squareSize; canvas.height = squareSize;
+                const c = canvas.getContext('2d');
+                c.imageSmoothingEnabled = false;
+                c.drawImage(imgElement, 0, row * squareSize, squareSize, squareSize, 0, 0, squareSize, squareSize);
+                squares.push(canvas);
+            }
+            resolve(squares);
+        });
+    }
+
+    function normalizeCanvasToStd(canvasSquare) {
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = STD_WIDTH; finalCanvas.height = STD_HEIGHT;
+        const fctx = finalCanvas.getContext('2d');
+        fctx.imageSmoothingEnabled = false;
+        fctx.clearRect(0, 0, STD_WIDTH, STD_HEIGHT);
+        const scale = Math.min(STD_WIDTH / canvasSquare.width, STD_HEIGHT / canvasSquare.height);
+        const dw = canvasSquare.width * scale, dh = canvasSquare.height * scale;
+        fctx.drawImage(canvasSquare, (STD_WIDTH - dw) / 2, (STD_HEIGHT - dh) / 2, dw, dh);
+        return finalCanvas;
+    }
+
+    async function createFramesFromImageFile(file, baseDelayMs) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = async () => {
+                    try {
+                        const squares = await cropImageIntoSquares(img);
+                        if (squares.length === 0) { reject(new Error('Cannot crop squares')); return; }
+                        const framesObjs = squares.map(sq => {
+                            const norm = normalizeCanvasToStd(sq);
+                            return {
+                                imgElement: img, delayMs: baseDelayMs,
+                                imgDataURL: norm.toDataURL('image/png'),
+                                normalizedCanvas: norm,
+                                rawCanvas: sq
+                            };
+                        });
+                        resolve(framesObjs);
+                    } catch (err) { reject(err); }
+                };
+                img.onerror = () => reject(new Error('Image load failed'));
+                img.src = e.target.result;
+            };
+            reader.onerror = () => reject(new Error('File read failed'));
+            reader.readAsDataURL(file);
+        });
+    }
+
+    async function addFramesFromFiles(files, delayOverride = null) {
+        if (!files.length) return;
+        const baseDelay = delayOverride !== null ? delayOverride : parseInt(document.getElementById('globalDelay').value);
+        let added = 0;
+        for (let file of files) {
+            if (!file.type.startsWith('image/')) continue;
+            try {
+                const newFrames = await createFramesFromImageFile(file, baseDelay);
+                frames.push(...newFrames);
+                added += newFrames.length;
+            } catch (err) { console.warn(err); }
+        }
+        if (added) {
+            await renderFrameList();
+            if (!isPlaying && frames.length) drawPreviewFrame(frames.length - 1);
+            if (isPlaying) restartPreview();
+            showToast(`✓ Added ${added} sequence frames (auto crop)`);
+        }
+    }
+
+    async function renderFrameList() {
+        const container = document.getElementById('framesListInner');
+        if (!container) return;
+        if (frames.length === 0) {
+            container.innerHTML = `<div class="empty-placeholder">✨ Upload image to auto-crop square frames<br>Supports .mcmeta frame delay config</div>`;
+            updateFrameCountText();
+            drawPreviewFrame(0);
+            return;
+        }
+        let html = '';
+        frames.forEach((frame, idx) => {
+            html += `
+                <div class="frame-card" data-index="${idx}">
+                    <div class="frame-thumb"><img src="${frame.normalizedCanvas.toDataURL()}" alt="frame ${idx+1}"></div>
+                    <div class="frame-info">
+                        <div class="frame-index">#${idx+1}</div>
+                        <div class="delay-control">
+                            <input type="number" class="frame-delay-input" data-idx="${idx}" value="${frame.delayMs}" step="10" min="10" max="5000">
+                            <span>ms</span>
+                            <button class="del-frame" data-idx="${idx}">✖</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+
+        document.querySelectorAll('.frame-delay-input').forEach(inp => {
+            inp.addEventListener('change', (e) => {
+                const idx = parseInt(inp.dataset.idx);
+                if (!isNaN(idx) && frames[idx]) {
+                    let val = parseInt(inp.value);
+                    if (isNaN(val)) val = 100;
+                    val = Math.min(5000, Math.max(10, val));
+                    frames[idx].delayMs = val;
+                    inp.value = val;
+                    if (!isPlaying) drawPreviewFrame(currentPreviewFrame % frames.length);
+                }
+            });
+        });
+
+        document.querySelectorAll('.del-frame').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const idx = parseInt(btn.dataset.idx);
+                if (!isNaN(idx) && frames[idx]) removeFrameAtIndex(idx);
+                e.stopPropagation();
+            });
+        });
+
+        if (window.frameSortable) window.frameSortable.destroy();
+        window.frameSortable = new Sortable(container, {
+            animation: 200, handle: '.frame-card',
+            onEnd: async (evt) => {
+                const oldIdx = evt.oldIndex, newIdx = evt.newIndex;
+                if (oldIdx !== newIdx && frames.length) {
+                    const moved = frames.splice(oldIdx, 1)[0];
+                    frames.splice(newIdx, 0, moved);
+                    await renderFrameList();
+                    if (!isPlaying) drawPreviewFrame(currentPreviewFrame % frames.length);
+                    else restartPreview();
+                }
+            }
+        });
+        updateFrameCountText();
+        if (!isPlaying) drawPreviewFrame(currentPreviewFrame % frames.length);
+    }
+
+    function removeFrameAtIndex(idx) {
+        if (idx < 0 || idx >= frames.length) return;
+        frames.splice(idx, 1);
+        if (frames.length === 0) {
+            stopPlayback(); currentPreviewFrame = 0;
+            ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+            drawCheckerboard(ctx, previewCanvas.width, previewCanvas.height);
+        } else {
+            if (currentPreviewFrame >= frames.length) currentPreviewFrame = frames.length - 1;
+            if (!isPlaying) drawPreviewFrame(currentPreviewFrame);
+        }
+        renderFrameList();
+        if (isPlaying) restartPreview();
+    }
+
+    function drawCheckerboard(c, w, h) {
+        const c1 = getComputedStyle(document.body).getPropertyValue('--checker-color1').trim() || '#2f3545';
+        const c2 = getComputedStyle(document.body).getPropertyValue('--checker-color2').trim() || '#222736';
+        const size = 20;
+        for (let y = 0; y < h; y += size) {
+            for (let x = 0; x < w; x += size) {
+                c.fillStyle = ((Math.floor(x / size) + Math.floor(y / size)) % 2 === 0) ? c1 : c2;
+                c.fillRect(x, y, size, size);
+            }
+        }
+    }
+
+    function drawPreviewFrame(idx) {
+        const canvas = document.getElementById('previewCanvas');
+        const c = canvas.getContext('2d');
+        canvas.width = STD_WIDTH; canvas.height = STD_HEIGHT;
+        drawCheckerboard(c, STD_WIDTH, STD_HEIGHT);
+        if (!frames.length) {
+            document.getElementById('currentFrameIdx').innerText = '0';
+            return;
+        }
+        const safeIdx = ((idx % frames.length) + frames.length) % frames.length;
+        const frame = frames[safeIdx];
+        currentPreviewFrame = safeIdx;
+        document.getElementById('currentFrameIdx').innerText = (safeIdx + 1).toString();
+        if (frame?.normalizedCanvas) {
+            c.imageSmoothingEnabled = false;
+            c.drawImage(frame.normalizedCanvas, 0, 0, STD_WIDTH, STD_HEIGHT);
+            const zoom = parseInt(document.getElementById('zoomSlider').value) / 100;
+            canvas.style.transform = `scale(${zoom})`;
+            canvas.style.transformOrigin = 'center center';
+        }
+    }
+
+    function startPlayback() {
+        if (frames.length === 0) return;
+        if (isPlaying) stopPlayback();
+        isPlaying = true;
+        document.getElementById('playStatus').innerHTML = '▶ Playing';
+        lastFrameTime = performance.now();
+        function step(now) {
+            if (!isPlaying) return;
+            if (frames.length === 0) { stopPlayback(); return; }
+            const delay = frames[currentPreviewFrame]?.delayMs || 100;
+            if (now - lastFrameTime >= delay) {
+                currentPreviewFrame = (currentPreviewFrame + 1) % frames.length;
+                drawPreviewFrame(currentPreviewFrame);
+                lastFrameTime = now;
+            }
+            animFrameId = requestAnimationFrame(step);
+        }
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+        animFrameId = requestAnimationFrame(step);
+    }
+
+    function stopPlayback() {
+        isPlaying = false;
+        if (animFrameId) { cancelAnimationFrame(animFrameId); animFrameId = null; }
+        document.getElementById('playStatus').innerHTML = '■ Stopped';
+        if (frames.length) drawPreviewFrame(currentPreviewFrame);
+    }
+
+    function restartPlayback() { if (isPlaying) { stopPlayback(); startPlayback(); } }
+
+    async function clearAllFrames() {
+        stopPlayback(); frames = []; currentPreviewFrame = 0;
+        await renderFrameList(); drawPreviewFrame(0);
+    }
+
+    function applyGlobalDelayToAll() {
+        const nd = parseInt(document.getElementById('globalDelay').value);
+        if (isNaN(nd)) return;
+        frames.forEach(f => f.delayMs = nd);
+        renderFrameList();
+        if (!isPlaying) drawPreviewFrame(currentPreviewFrame);
+    }
+
+    function parseMcMetaAndApply(jsonContent) {
+        try {
+            let config = JSON.parse(jsonContent);
+            let delays = [];
+            let anim = config.animation || config;
+            const TICK_MS = 50;
+            const frametime = (anim && typeof anim.frametime === 'number') ? anim.frametime : 1;
+
+            if (anim && Array.isArray(anim.frames)) {
+                for (let f of anim.frames) {
+                    if (typeof f === 'number') {
+                        delays.push(frametime * TICK_MS);
+                    } else if (f && typeof f.index === 'number') {
+                        const time = (typeof f.time === 'number') ? f.time : frametime;
+                        delays.push(time * TICK_MS);
+                    } else if (f && typeof f.time === 'number') {
+                        delays.push(f.time * TICK_MS);
+                    } else if (f && typeof f.delay === 'number') {
+                        delays.push(f.delay * TICK_MS);
+                    } else {
+                        delays.push(frametime * TICK_MS);
+                    }
+                }
+            } else if (anim && typeof anim.frametime === 'number') {
+                for (let i = 0; i < frames.length; i++) delays.push(anim.frametime * TICK_MS);
+            } else if (Array.isArray(anim)) {
+                delays = anim.map(v => {
+                    if (typeof v === 'number') return v * TICK_MS;
+                    if (v && typeof v.time === 'number') return v.time * TICK_MS;
+                    return frametime * TICK_MS;
+                });
+            } else {
+                alert('Unrecognized mcmeta structure');
+                return false;
+            }
+
+            if (delays.length === 0) { alert('No valid frame delay in mcmeta'); return false; }
+            for (let i = 0; i < frames.length && i < delays.length; i++) frames[i].delayMs = delays[i];
+            renderFrameList();
+            showToast('✓ Applied .mcmeta delay config');
+            return true;
+        } catch (err) {
+            alert('Parse .mcmeta failed: ' + err.message);
+            return false;
+        }
+    }
+
+    function uploadMcMetaFile() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.mcmeta,application/json';
+        input.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const text = await file.text();
+            if (frames.length === 0) { alert('Please add image frames first'); return; }
+            parseMcMetaAndApply(text);
+        };
+        input.click();
+    }
+
+    async function loadGifJs() {
+        if (typeof GIF !== 'undefined') return;
+        await new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js';
+            script.onload = resolve;
+            script.onerror = () => reject(new Error('Failed to load GIF encoder'));
+            document.head.appendChild(script);
+        });
+    }
+
+    async function getGifWorkerBlobUrl() {
+        if (gifWorkerBlobUrl) return gifWorkerBlobUrl;
+        const response = await fetch('https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js');
+        const workerScript = await response.text();
+        const blob = new Blob([workerScript], { type: 'application/javascript' });
+        gifWorkerBlobUrl = URL.createObjectURL(blob);
+        return gifWorkerBlobUrl;
+    }
+
+    async function exportGif(width, height, getFrameCanvas) {
+        if (frames.length === 0) throw new Error("No frames to export");
+        await loadGifJs();
+        const workerUrl = await getGifWorkerBlobUrl();
+
+        const gif = new GIF({
+            workers: 2,
+            quality: 10,
+            width: width,
+            height: height,
+            workerScript: workerUrl,
+            transparent: 0xFF00FF,
+            background: 0xFF00FF,
+            repeat: 0
+        });
+
+        for (let i = 0; i < frames.length; i++) {
+            const source = getFrameCanvas(i);
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const c = canvas.getContext('2d');
+
+            c.fillStyle = '#FF00FF';
+            c.fillRect(0, 0, width, height);
+            c.drawImage(source, 0, 0);
+
+            const imgData = c.getImageData(0, 0, width, height);
+            const data = imgData.data;
+            for (let j = 3; j < data.length; j += 4) {
+                if (data[j] === 0) {
+                    data[j-3] = 255;
+                    data[j-2] = 0;
+                    data[j-1] = 255;
+                    data[j] = 255;
+                }
+            }
+            c.putImageData(imgData, 0, 0);
+
+            gif.addFrame(canvas, { delay: frames[i].delayMs, copy: true });
+        }
+
+        return new Promise((resolve, reject) => {
+            gif.on('finished', (blob) => resolve(blob));
+            gif.on('error', (err) => reject(err));
+            gif.render();
+        });
+    }
+
+    async function exportNormalGif() {
+        return exportGif(STD_WIDTH, STD_HEIGHT, (i) => frames[i].normalizedCanvas);
+    }
+
+    async function exportIconGif(targetWidth) {
+        return exportGif(targetWidth, targetWidth, (i) => {
+            const raw = frames[i].rawCanvas;
+            const canvas = document.createElement('canvas');
+            canvas.width = targetWidth;
+            canvas.height = targetWidth;
+            const c = canvas.getContext('2d');
+            c.imageSmoothingEnabled = false;
+            c.clearRect(0, 0, targetWidth, targetWidth);
+            c.drawImage(raw, 0, 0, targetWidth, targetWidth);
+            return canvas;
+        });
+    }
+
+    async function exportMcIconGifs() {
+        if (frames.length === 0) { alert('No frames to export'); return; }
+        showToast('Generating dual-size...');
+        try {
+            const blob32 = await exportIconGif(32);
+            const blob128 = await exportIconGif(128);
+            downloadBlob(blob32, `mc_icon_32px_${Date.now()}.gif`);
+            downloadBlob(blob128, `mc_icon_128px_${Date.now()}.gif`);
+            showToast('✓ Dual-size GIFs exported');
+        } catch (e) { alert('Export failed: ' + e.message); }
+    }
+
+    async function handleExport() {
+        if (frames.length === 0) { alert('No frames to export'); return; }
+        const exportBtn = document.getElementById('exportGifBtn');
+        exportBtn.disabled = true;
+        const originalText = exportBtn.textContent;
+        exportBtn.textContent = document.getElementById('mcIconModeCheckbox').checked ? 'Generating dual-size...' : 'Generating...';
+        try {
+            if (document.getElementById('mcIconModeCheckbox').checked) await exportMcIconGifs();
+            else {
+                const blob = await exportNormalGif();
+                downloadBlob(blob, `mcae_animation_${Date.now()}.gif`);
+                showToast('Normal GIF exported');
+            }
+        } catch (e) { alert('Export failed: ' + e.message); }
+        finally { exportBtn.disabled = false; exportBtn.textContent = originalText; }
+    }
+
+    function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    function showToast(msg) {
+        const toast = document.createElement('div');
+        toast.className = 'success-toast';
+        toast.innerText = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2200);
+    }
+
+    function updateFrameCountText() {
+        const badge = document.getElementById('frameCountBadge');
+        if (badge) badge.innerHTML = frames.length + ' frames';
+        const totalSpan = document.getElementById('totalFramesSpan');
+        if (totalSpan) totalSpan.innerText = frames.length;
+        const curIdx = document.getElementById('currentFrameIdx');
+        if (curIdx) curIdx.innerText = frames.length === 0 ? '0' : ((currentPreviewFrame % frames.length) + 1).toString();
+    }
+
+    function setTheme(theme) {
+        if (theme === 'light') document.body.classList.add('light');
+        else document.body.classList.remove('light');
+        localStorage.setItem('mcae_theme', theme);
+    }
+
+    function toggleTheme() {
+        const isLight = document.body.classList.contains('light');
+        const nextTheme = isLight ? 'dark' : 'light';
+        setTheme(nextTheme);
+        document.getElementById('themeToggleBtn').innerText = nextTheme === 'light' ? '☼' : '☽';
+        if (!isPlaying) drawPreviewFrame(frames.length ? currentPreviewFrame : 0);
+    }
+
+    function initTheme() {
+        const stored = localStorage.getItem('mcae_theme');
+        const isLight = stored === 'light';
+        setTheme(isLight ? 'light' : 'dark');
+        document.getElementById('themeToggleBtn').innerText = isLight ? '☼' : '☽';
+    }
+
+    function initCollapseState() {
+        const saved = localStorage.getItem('mcae_frames_collapsed');
+        const framesOuter = document.getElementById('framesListContainer');
+        const collapseBtn = document.getElementById('collapseFramesBtn');
+        isFramesCollapsed = saved === 'true';
+        framesOuter.classList.toggle('collapsed', isFramesCollapsed);
+        collapseBtn.classList.toggle('collapsed', isFramesCollapsed);
+    }
+
+    function toggleFramesCollapse() {
+        const framesOuter = document.getElementById('framesListContainer');
+        const collapseBtn = document.getElementById('collapseFramesBtn');
+        isFramesCollapsed = !isFramesCollapsed;
+        framesOuter.classList.toggle('collapsed', isFramesCollapsed);
+        collapseBtn.classList.toggle('collapsed', isFramesCollapsed);
+        localStorage.setItem('mcae_frames_collapsed', isFramesCollapsed ? 'true' : 'false');
+    }
+
+    document.getElementById('addFrameBtn').onclick = () => {
+        const inp = document.createElement('input');
+        inp.type = 'file'; inp.multiple = true; inp.accept = 'image/*';
+        inp.onchange = async (e) => { if (inp.files.length) await addFramesFromFiles(Array.from(inp.files)); };
+        inp.click();
+    };
+    document.getElementById('removeAllBtn').onclick = clearAllFrames;
+    document.getElementById('playBtn').onclick = () => { if (frames.length) startPlayback(); else alert('Please add image frames first'); };
+    document.getElementById('stopBtn').onclick = stopPlayback;
+    document.getElementById('exportGifBtn').onclick = handleExport;
+    document.getElementById('applyGlobalDelay').onclick = applyGlobalDelayToAll;
+    document.getElementById('uploadMcMetaBtn').onclick = uploadMcMetaFile;
+    const batchFilesInput = document.getElementById('batchFilesInput');
+    batchFilesInput.onchange = async (e) => {
+        if (e.target.files.length) { await addFramesFromFiles(Array.from(e.target.files)); batchFilesInput.value = ''; }
+    };
+    document.getElementById('zoomSlider').oninput = (e) => {
+        let v = e.target.value;
+        document.getElementById('zoomVal').innerText = v + '%';
+        let zoom = v / 100;
+        previewCanvas.style.transform = `scale(${zoom})`;
+        if (!isPlaying && frames.length) drawPreviewFrame(currentPreviewFrame);
+    };
+    document.getElementById('themeToggleBtn').onclick = toggleTheme;
+    document.getElementById('collapseFramesBtn').onclick = toggleFramesCollapse;
+    document.body.addEventListener('dragover', e => e.preventDefault());
+    document.body.addEventListener('drop', async e => {
+        e.preventDefault();
+        const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+        if (files.length) await addFramesFromFiles(files);
+    });
+
+    async function init() {
+        initTheme();
+        initCollapseState();
+        ctx.imageSmoothingEnabled = false;
+        await renderFrameList();
+        drawPreviewFrame(0);
+        previewCanvas.style.transform = 'scale(1)';
+        document.getElementById('zoomSlider').value = '100';
+        document.getElementById('zoomVal').innerText = '100%';
+    }
+    init();
+</script>
+</body>
+</html>
