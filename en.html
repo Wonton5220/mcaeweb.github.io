@@ -388,7 +388,7 @@
         if (added) {
             await renderFrameList();
             if (!isPlaying && frames.length) drawPreviewFrame(frames.length - 1);
-            if (isPlaying) restartPreview();
+            if (isPlaying) restartPlayback();
             showToast(`✓ Added ${added} sequence frames (auto crop)`);
         }
     }
@@ -404,7 +404,7 @@
         }
         let html = '';
         frames.forEach((frame, idx) => {
-            html += `
+                       html += `
                 <div class="frame-card" data-index="${idx}">
                     <div class="frame-thumb"><img src="${frame.normalizedCanvas.toDataURL()}" alt="frame ${idx+1}"></div>
                     <div class="frame-info">
@@ -452,7 +452,7 @@
                     frames.splice(newIdx, 0, moved);
                     await renderFrameList();
                     if (!isPlaying) drawPreviewFrame(currentPreviewFrame % frames.length);
-                    else restartPreview();
+                    else restartPlayback();
                 }
             }
         });
@@ -472,7 +472,7 @@
             if (!isPlaying) drawPreviewFrame(currentPreviewFrame);
         }
         renderFrameList();
-        if (isPlaying) restartPreview();
+        if (isPlaying) restartPlayback();
     }
 
     function drawCheckerboard(c, w, h) {
@@ -764,6 +764,7 @@
         const isLight = document.body.classList.contains('light');
         const nextTheme = isLight ? 'dark' : 'light';
         setTheme(nextTheme);
+        // 图标表示"目标状态"：要去 light 显示 ☼，要去 dark 显示 ☽
         document.getElementById('themeToggleBtn').innerText = nextTheme === 'light' ? '☼' : '☽';
         if (!isPlaying) drawPreviewFrame(frames.length ? currentPreviewFrame : 0);
     }
@@ -772,7 +773,9 @@
         const stored = localStorage.getItem('mcae_theme');
         const isLight = stored === 'light';
         setTheme(isLight ? 'light' : 'dark');
-        document.getElementById('themeToggleBtn').innerText = isLight ? '☼' : '☽';
+        // 修正：与 toggleTheme 保持一致，图标表示目标状态
+        // 当前 dark → 目标 light → ☼；当前 light → 目标 dark → ☽
+        document.getElementById('themeToggleBtn').innerText = isLight ? '☽' : '☼';
     }
 
     function initCollapseState() {
